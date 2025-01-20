@@ -1,5 +1,5 @@
 Setup:
-1. Open VS Code, connect to WSL
+1. Open a code editor (ex. VSCode) where you can run Flutter (ex. WSL for Windows)
 2. Go to your coding/cis4030 folder
 3. git clone https://github.com/ddombrov/FlutterDemoStarting.git
 3. cd FlutterDemoStarting/counter_app_password
