@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+// ACTION: uncomment this code
 // import 'package:encrypt/encrypt.dart' as encrypt; 
 
+// ACTION: uncomment this code
 // final _key = encrypt.Key.fromUtf8('my32lengthsupersecretnooneknows1');
 // final _iv = encrypt.IV.fromLength(16);
 
@@ -42,11 +45,13 @@ Future<void> _loadCredentials() async {
     final lines = await file.readAsLines();
     final credentials = <String, String>{};
 
+    // ACTION: uncomment this code
     // final encrypter = encrypt.Encrypter(encrypt.AES(_key));
 
     for (var line in lines) {
       final parts = line.split(':');
 
+      // ACTION: uncomment this code
       // if (parts.length == 3) {
       //   final username = parts[0];
       //   final ivBase64 = parts[1];
@@ -57,11 +62,13 @@ Future<void> _loadCredentials() async {
       //   credentials[username] = decryptedPassword;
       // }
 
+      // Action: comment this if code block
       if (parts.length == 2) {
         final username = parts[0];
         final password = parts[1];
         credentials[username] = password;
       }
+
     }
       setState(() {
         _credentials = credentials;
