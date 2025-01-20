@@ -1,7 +1,7 @@
 Setup:
 1. Open VS Code, connect to WSL
 2. Go to your coding/cis4030 folder
-3. it clone https://github.com/ddombrov/FlutterDemoStarting.git
+3. git clone https://github.com/ddombrov/FlutterDemoStarting.git
 3. cd FlutterDemoStarting/counter_app_password
 
 Run the Plaintext Password System:
