@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+// import 'package:encrypt/encrypt.dart' as encrypt; 
 
+// final _key = encrypt.Key.fromUtf8('my32lengthsupersecretnooneknows1');
+// final _iv = encrypt.IV.fromLength(16);
 
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,18 +20,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-
 class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   Map<String, String> _credentials = {};
-
 
   @override
   void initState() {
@@ -37,23 +36,33 @@ class _LoginScreenState extends State<LoginScreen> {
     _loadCredentials();
   }
 
+Future<void> _loadCredentials() async {
+  try {
+    final file = File('password.txt');
+    final lines = await file.readAsLines();
+    final credentials = <String, String>{};
 
-  // Load username and password from the file
-  Future<void> _loadCredentials() async {
-    try {
-      final file = File('password.txt');
-      final lines = await file.readAsLines();
-      final credentials = <String, String>{};
+    // final encrypter = encrypt.Encrypter(encrypt.AES(_key));
 
+    for (var line in lines) {
+      final parts = line.split(':');
 
-      for (var line in lines) {
-        final parts = line.split(':');
-        if (parts.length == 2) {
-          credentials[parts[0]] = parts[1];
-        }
+      // if (parts.length == 3) {
+      //   final username = parts[0];
+      //   final ivBase64 = parts[1];
+      //   final encryptedPasswordBase64 = parts[2];
+      //   final iv = encrypt.IV.fromBase64(ivBase64);
+      //   final encryptedPassword = encrypt.Encrypted.fromBase64(encryptedPasswordBase64);
+      //   final decryptedPassword = encrypter.decrypt(encryptedPassword, iv: iv);  
+      //   credentials[username] = decryptedPassword;
+      // }
+
+      if (parts.length == 2) {
+        final username = parts[0];
+        final password = parts[1];
+        credentials[username] = password;
       }
-
-
+    }
       setState(() {
         _credentials = credentials;
       });
@@ -62,11 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-
   void _attemptLogin() {
     final enteredUsername = _usernameController.text;
     final enteredPassword = _passwordController.text;
-
 
     if (_credentials.containsKey(enteredUsername) &&
         _credentials[enteredUsername] == enteredPassword) {
@@ -80,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,23 +118,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-
 class CounterApp extends StatefulWidget {
   @override
   _CounterAppState createState() => _CounterAppState();
 }
 
-
 class _CounterAppState extends State<CounterApp> {
   int _counter = 0;
-
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
