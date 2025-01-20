@@ -15,6 +15,11 @@ Encrypted Password System:
 4. flutter run
 
 Troubleshooting:
+
+If issues with missing requirements:
+flutter doctor
+(will tell you what is missing)
+
 If issues with running:
 rm -rf build
 flutter pub get
