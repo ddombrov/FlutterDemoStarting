@@ -9,7 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  encrypt: ^5.0.0
+
+  # ACTION: uncomment the following line
+  # encrypt: ^5.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
