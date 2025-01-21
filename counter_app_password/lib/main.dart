@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 
 // ACTION: uncomment this code
-// import 'package:encrypt/encrypt.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 // ACTION: uncomment this code
-// final _key = Key.fromUtf8('my32lengthsupersecretnooneknows1');
-// final _iv = IV.fromLength(16);
+final _key = encrypt.Key.fromUtf8('my32lengthsupersecretnooneknows1');
+final _iv = encrypt.IV.fromLength(16);
 
 void main() {
   runApp(MyApp());
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final credentials = <String, String>{};
       
       // ACTION: uncomment this code
-      // final encrypter = Encrypter(AES(_key));
+      final encrypter = encrypt.Encrypter(encrypt.AES(_key));
 
       for (var line in lines) {
         final parts = line.split(':');
@@ -58,15 +58,15 @@ class _LoginScreenState extends State<LoginScreen> {
         }
 
         // ACTION: uncomment this code
-        // if (parts.length == 3) {
-        //   final username = parts[0];
-        //   final ivBase64 = parts[1];
-        //   final encryptedPasswordBase64 = parts[2];
-        //   final iv = IV.fromBase64(ivBase64);
-        //   final encryptedPassword = Encrypted.fromBase64(encryptedPasswordBase64);
-        //   final decryptedPassword = encrypter.decrypt(encryptedPassword, iv: iv);  
-        //   credentials[username] = decryptedPassword;
-        // }
+        if (parts.length == 3) {
+          final username = parts[0];
+          final ivBase64 = parts[1];
+          final encryptedPasswordBase64 = parts[2];
+          final iv = encrypt.IV.fromBase64(ivBase64);
+          final encryptedPassword = encrypt.Encrypted.fromBase64(encryptedPasswordBase64);
+          final decryptedPassword = encrypter.decrypt(encryptedPassword, iv: iv);  
+          credentials[username] = decryptedPassword;
+        }
 
       }
 
