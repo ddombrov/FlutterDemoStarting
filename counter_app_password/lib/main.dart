@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
 
 // ACTION: uncomment this code
-// import 'package:encrypt/encrypt.dart' as encrypt; 
+// import 'package:encrypt/encrypt.dart' as encrypt;
 
 // ACTION: uncomment this code
 // final _key = encrypt.Key.fromUtf8('my32lengthsupersecretnooneknows1');
@@ -39,42 +40,41 @@ class _LoginScreenState extends State<LoginScreen> {
     _loadCredentials();
   }
 
-Future<void> _loadCredentials() async {
-  try {
-    final file = File('password.txt');
-    final lines = await file.readAsLines();
-    final credentials = <String, String>{};
-
-    // ACTION: uncomment this code
-    // final encrypter = encrypt.Encrypter(encrypt.AES(_key));
-
-    for (var line in lines) {
-      final parts = line.split(':');
-
+  Future<void> _loadCredentials() async {
+    try {
+      final data = await rootBundle.loadString('assets/password.txt');
+      final lines = data.split('\n');
+      final credentials = <String, String>{};
+      
       // ACTION: uncomment this code
-      // if (parts.length == 3) {
-      //   final username = parts[0];
-      //   final ivBase64 = parts[1];
-      //   final encryptedPasswordBase64 = parts[2];
-      //   final iv = encrypt.IV.fromBase64(ivBase64);
-      //   final encryptedPassword = encrypt.Encrypted.fromBase64(encryptedPasswordBase64);
-      //   final decryptedPassword = encrypter.decrypt(encryptedPassword, iv: iv);  
-      //   credentials[username] = decryptedPassword;
-      // }
+      // final encrypter = encrypt.Encrypter(encrypt.AES(_key));
 
-      // Action: comment this if code block
-      if (parts.length == 2) {
-        final username = parts[0];
-        final password = parts[1];
-        credentials[username] = password;
+      for (var line in lines) {
+        final parts = line.split(':');
+
+        //ACTION: comment this code
+        if (parts.length == 2) {
+          credentials[parts[0]] = parts[1].trim();
+        }
+
+        // ACTION: uncomment this code
+        // if (parts.length == 3) {
+        //   final username = parts[0];
+        //   final ivBase64 = parts[1];
+        //   final encryptedPasswordBase64 = parts[2];
+        //   final iv = encrypt.IV.fromBase64(ivBase64);
+        //   final encryptedPassword = encrypt.Encrypted.fromBase64(encryptedPasswordBase64);
+        //   final decryptedPassword = encrypter.decrypt(encryptedPassword, iv: iv);  
+        //   credentials[username] = decryptedPassword;
+        // }
+
       }
 
-    }
       setState(() {
         _credentials = credentials;
       });
     } catch (e) {
-      print('Error reading password.txt: $e');
+      print('Error reading assets/password.txt: $e');
     }
   }
 
@@ -164,9 +164,3 @@ class _CounterAppState extends State<CounterApp> {
     );
   }
 }
-
-
-
-
-
-
