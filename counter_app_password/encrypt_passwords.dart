@@ -10,7 +10,7 @@ void main() async {
 
 
   // Read the existing password.txt file
-  final file = File('password.txt');
+  final file = File('assets/password.txt'); 
   if (await file.exists()) {
     final lines = await file.readAsLines();
     final encryptedLines = <String>[];
