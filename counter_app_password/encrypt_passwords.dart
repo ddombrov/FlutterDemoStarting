@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:encrypt/dart';
 
 
 void main() async {
   // Define a key (must be 32 bytes for AES)
-  final key = encrypt.Key.fromUtf8('my32lengthsupersecretnooneknows1');
-  final iv = encrypt.IV.fromLength(16); // Random IV
-  final encrypter = encrypt.Encrypter(encrypt.AES(key));
+  final key = Key.fromUtf8('my32lengthsupersecretnooneknows1');
+  final iv = IV.fromLength(16); // Random IV
+  final encrypter = Encrypter(AES(key));
 
 
   // Read the existing password.txt file
