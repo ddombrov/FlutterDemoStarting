@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:encrypt/dart';
+import 'package:encrypt/encrypt.dart';
 
 
 void main() async {

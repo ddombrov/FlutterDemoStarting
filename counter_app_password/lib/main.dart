@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 
 // ACTION: uncomment this code
-// import 'package:encrypt/dart';
+// import 'package:encrypt/encrypt.dart';
 
 // ACTION: uncomment this code
 // final _key = Key.fromUtf8('my32lengthsupersecretnooneknows1');
